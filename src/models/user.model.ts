@@ -17,6 +17,14 @@ const userSchema = new Schema(
       type: String,
       enum: ['admin', 'operator'],
       default: 'operator'
+    },
+    totpSecret: {
+      type: String,
+      default: null
+    },
+    totpEnabled: {
+      type: Boolean,
+      default: false
     }
   },
   {
