@@ -1,6 +1,10 @@
+import { dirname, resolve } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import dotenv from 'dotenv';
 
-dotenv.config();
+const currentDir = dirname(fileURLToPath(import.meta.url));
+const envFilePath = resolve(currentDir, '../../.env');
+dotenv.config({ path: envFilePath });
 
 const parseNumber = (value: string | undefined, fallback: number): number => {
   if (!value) {
