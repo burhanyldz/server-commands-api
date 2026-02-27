@@ -25,6 +25,21 @@ const userSchema = new Schema(
     totpEnabled: {
       type: Boolean,
       default: false
+    },
+    passkeys: {
+      type: [
+        {
+          credentialID: { type: String, required: true },
+          credentialPublicKey: { type: String, required: true },
+          counter: { type: Number, required: true },
+          deviceType: { type: String, default: 'singleDevice' },
+          backedUp: { type: Boolean, default: false },
+          transports: { type: [String], default: [] },
+          name: { type: String, default: 'Passkey' },
+          createdAt: { type: Date, default: Date.now }
+        }
+      ],
+      default: []
     }
   },
   {

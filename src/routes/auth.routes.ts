@@ -8,6 +8,14 @@ import {
   login,
   setupTotp
 } from '../controllers/auth.controller.js';
+import {
+  passkeyDelete,
+  passkeyList,
+  passkeyLoginOptions,
+  passkeyLoginVerify,
+  passkeyRegisterOptions,
+  passkeyRegisterVerify
+} from '../controllers/webauthn.controller.js';
 import { requireAuth } from '../middleware/auth.js';
 
 const router = Router();
@@ -23,5 +31,15 @@ router.post('/2fa/complete-login', completeTotpLogin);
 router.post('/2fa/setup', requireAuth, setupTotp);
 router.post('/2fa/confirm', requireAuth, confirmTotp);
 router.post('/2fa/disable', requireAuth, disableTotp);
+
+// Passkey login (public)
+router.post('/passkey/login-options', passkeyLoginOptions);
+router.post('/passkey/login-verify', passkeyLoginVerify);
+
+// Passkey registration & management (authenticated)
+router.get('/passkey/register-options', requireAuth, passkeyRegisterOptions);
+router.post('/passkey/register-verify', requireAuth, passkeyRegisterVerify);
+router.get('/passkey/list', requireAuth, passkeyList);
+router.delete('/passkey/:credentialId', requireAuth, passkeyDelete);
 
 export default router;

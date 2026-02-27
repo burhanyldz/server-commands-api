@@ -39,7 +39,10 @@ export const env = {
   jwtExpiresIn: process.env.JWT_EXPIRES_IN ?? '24h',
   bcryptRounds: parseNumber(process.env.BCRYPT_ROUNDS, 10),
   bootstrapToken: process.env.BOOTSTRAP_TOKEN ?? '',
-  corsOrigins: parseOrigins(process.env.CORS_ORIGIN)
+  corsOrigins: parseOrigins(process.env.CORS_ORIGIN),
+  webauthnRpId: process.env.WEBAUTHN_RP_ID ?? 'localhost',
+  webauthnRpName: process.env.WEBAUTHN_RP_NAME ?? 'Server Commands',
+  webauthnOrigin: process.env.WEBAUTHN_ORIGIN ?? 'http://localhost:5173'
 };
 
 const requiredEnvs = ['MONGODB_URI', 'JWT_SECRET'] as const;
